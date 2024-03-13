@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="../styles/output.css" rel="stylesheet"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
     <div class="flex">
-        <nav class="h-screen w-44 px-2 bg-white shadow-md transition-all duration-300 hidden">
+        <nav class="h-screen w-44 px-2 bg-white transition-all duration-300 hidden">
             <h1 class="text-gray-400 font-bold mt-14 ml-2">Home</h1>
             <button class="bg-violet-100 py-2 px-2 rounded-lg flex w-full items-center my-2 hover:bg-violet-100">
                 <img src="../images/icons8-business-32 (1).png" alt="Projects" class="h-5 w-5"/>
@@ -41,7 +41,7 @@
             <header class="flex py-2 flex-row justify-between items-center">
 
                 <div class="flex basis-1/4">
-                    <button id="sideBarToggle" class="px-2 py-2 text-gray-200 hover:text-white focus:outline-none rounded-md mr-1.5 ml-2">
+                    <button id="sideBarToggle" class="px-2 py-2 text-gray-200 hover:bg-gray-200 focus:outline-none rounded-md mr-1.5 ml-2">
                         <img src="../images/icons8-menu.svg" alt="Menu" class="h-4 w-4"/>
                     </button>
                     <h1 class="py-2 font-bold">My Projects</h1>
@@ -68,11 +68,11 @@
                 <div class="h-screen bg-white basis-9/12 px-4">
                     <div class="flex justify-between w-full">
                         <div class="flex items-center">
-                            <button class="bg-violet-100 py-2 px-2 rounded-lg flex w-28 justify-center items-center my-2 border-2 border-neutral-500">
+                            <button class="bg-violet-50 py-2 px-2 rounded-lg flex w-28 justify-center items-center my-2 border-2 border-neutral-500">
                                 <img src="../images/icons8-list-64.png" alt="list" class="h-6 w-6"/>
                                 <span class="text-sm ml-2">List</span>
                             </button>
-                            <button class="py-2 px-2 rounded-lg flex w-28 justify-center items-center my-2 border-2 ml-4 hover:bg-violet-100 hover:border-neutral-500">
+                            <button class="py-2 px-2 rounded-lg flex w-28 justify-center items-center my-2 border-2 ml-4 hover:bg-violet-50 hover:border-neutral-500">
                                 <img src="../images/menu.png" alt="board" class="h-4 w-4"/>
                                 <span class="text-gray-400 text-sm ml-2">Board</span>
                             </button>
@@ -110,7 +110,55 @@
                                     <span class="font-bold text-sm">30 min</span>
                                 </div>
                             </div>
+                            <div class="w-full">
+                                <p class="text-gray-400 text-xs font-bold mt-4 mb-1">Invited member</p>
+                                <img src="../images/people.png" alt="people" class="h-10 w-1/2"/>
+                            </div>
+                            <div class="w-full px-4 items-center">
+                                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400">
+                                    <span class="text-center text-xs text-white">Join Meeting</span>
+                                </button>
+                            </div>
                         </div>
+                    </div>
+                    <div class="flex justify-between w-full mt-4">
+                        <h2 class="font-bold">Upcoming Task</h2>
+                    </div>
+                    <div class="bg-white mx-1 px-4 py-2 rounded-md my-4 shadow-md">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-bold text-sm">Product Planning</span>
+                            <div>
+                                <span class="bg-yellow-100 rounded-3xl text-yellow-400 text-xs px-2">Urgent</span>
+                                <button>
+                                    <img src="../images/icons8-three-dots-30.png" alt="edit" class="h-4 w-4"/>
+                                </button>
+                            </div>
+                        </div>
+                        <img src="../images/team2.png" alt="team" class="h10 w-16"/>
+                        <div class="flex mt-2 items-center">
+                            <progress value="30" max="100"></progress>
+                            <img src="../images/icons8-clock-24 (1).png" alt="clock" class="h-3 w-3 ml-2"/>
+                            <span class="text-gray-400 font-bold text-2xs ml-1">10:00-11:00</span>
+                        </div>
+                        <p class="text-gray-400 text-2xs ml-1 my-2">Management</p>
+                    </div>
+                    <div class="bg-white mx-1 px-4 py-2 mb-2 rounded-md my-4 shadow-md">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-bold text-sm">Product Planning</span>
+                            <div>
+                                <span class="bg-yellow-100 rounded-3xl text-yellow-400 text-xs px-2">Urgent</span>
+                                <button>
+                                    <img src="../images/icons8-three-dots-30.png" alt="edit" class="h-4 w-4"/>
+                                </button>
+                            </div>
+                        </div>
+                        <img src="../images/team2.png" alt="team" class="h10 w-16"/>
+                        <div class="flex mt-2 items-center">
+                            <progress value="30" max="100"></progress>
+                            <img src="../images/icons8-clock-24 (1).png" alt="clock" class="h-3 w-3 ml-2"/>
+                            <span class="text-gray-400 font-bold text-2xs ml-1">10:00-11:00</span>
+                        </div>
+                        <p class="text-gray-400 text-2xs ml-1 my-2">Management</p>
                     </div>
                 </div>
             </div>

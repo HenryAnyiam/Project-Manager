@@ -1,3 +1,5 @@
 Project-Manager-FE/node_modules/
 Project-Manager-BE/venv/
 Project-Manager-FE/package-lock.json
+.DS_Store
+__pycache__/
