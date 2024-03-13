@@ -44,8 +44,14 @@ class Project(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="projects")
     due_date = models.DateField()
     due_time = models.TimeField()
+    image = models.ImageField(upload_to="project_images", blank=True)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
     progress = models.IntegerField(default=0)
+
+    def clear_older_images(self):
+        """clear older images before setting a new one"""
+        if self.image and path.isfile(self.image.path):
+            remove(self.image.path)
 
     @property
     def due_in(self):
@@ -71,6 +77,9 @@ class Project(models.Model):
     
     def __str__(self):
         return f"Project: {self.name}"
+    
+    class Meta:
+        ordering = ["created_at"]
 
 
 class Task(models.Model):
@@ -79,6 +88,10 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks")
     name = models.CharField(max_length=250)
     done = models.BooleanField(default=False)
+    created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"Task: {self.name}"
+    
+    class Meta:
+        ordering = ["created_at"]
