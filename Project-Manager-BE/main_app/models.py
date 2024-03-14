@@ -66,7 +66,7 @@ class Project(models.Model):
     def done_tasks(self):
         """get total tasks"""
 
-        return f"{self.tasks.filter(done=True)} / {self.tasks.all()}" 
+        return f"{len(self.tasks.filter(done=True))} / {len(self.tasks.all())}" 
     
     def update_progress(self):
         """update project progress"""
