@@ -35,6 +35,5 @@ class CustomAuthToken(ObtainAuthToken):
                 'user_id': user.id,
                 'email': user.email,
                 'username': user.username,
-                'profile_pic': user.profile_pic.url
             })
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
