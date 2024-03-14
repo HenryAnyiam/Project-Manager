@@ -46,7 +46,6 @@ class Project(models.Model):
     due_time = models.TimeField()
     image = models.ImageField(upload_to="project_images", blank=True)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
-    progress = models.IntegerField(default=0)
 
     def clear_older_images(self):
         """clear older images before setting a new one"""
@@ -68,12 +67,15 @@ class Project(models.Model):
 
         return f"{len(self.tasks.filter(done=True))} / {len(self.tasks.all())}" 
     
-    def update_progress(self):
-        """update project progress"""
+    @property
+    def status(self):
+        """update project status"""
         all_tasks = self.tasks.all()
         done_tasks = self.tasks.filter(done=True)
-        self.progress = (len(done_tasks) / len(all_tasks)) * 100
-        self.save()
+        try:
+            return (len(done_tasks) / len(all_tasks)) * 100
+        except ZeroDivisionError:
+            return 0
     
     def __str__(self):
         return f"Project: {self.name}"
