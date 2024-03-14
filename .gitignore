@@ -3,3 +3,5 @@ Project-Manager-BE/venv/
 Project-Manager-FE/package-lock.json
 .DS_Store
 __pycache__/
+profile_pics/
+project_images/

@@ -73,7 +73,7 @@ class Project(models.Model):
         all_tasks = self.tasks.all()
         done_tasks = self.tasks.filter(done=True)
         try:
-            return (len(done_tasks) / len(all_tasks)) * 100
+            return round((len(done_tasks) / len(all_tasks)) * 100, 0)
         except ZeroDivisionError:
             return 0
     

@@ -175,12 +175,52 @@ class ProjectCreateView(APIView):
     def get(self, request, format=None):
         """return current users projects"""
         teams = request.user.teams.all()
+        query = {
+            "name__contains": request.query_params.get('name'),
+            "due_date": request.query_params.get('due_date'),
+            "created_at": request.query_params.get('created_at'),
+        }
+        query_set = {key: value for key, value in query.items() if value}
         projects = []
-        for team in teams:
-            projects.extend(team.projects.all())
+        if query_set:
+            for team in teams:
+                projects.extend(team.projects.filter(**query_set))
+        else:
+            for team in teams:
+                projects.extend(team.projects.all())
         serializer = ProjectSerializer(projects, many=True)
-        
-        return Response(serializer.data)
+        final_filter = serializer.data
+        if "status" in request.query_params:
+            try:
+                status_filter = int(request.query_params.get('status'))
+            except ValueError:
+                return Response({"message": "Invalid Filter Parameter"},
+                                status=status.HTTP_400_BAD_REQUEST)
+            final_filter = [i for i in final_filter if i.get('status') == status_filter]
+        elif "status__lte" in request.query_params and "status__gte" in request.query_params:
+            try:
+                lte = int(request.query_params.get('status__lte'))
+                gte = int(request.query_params.get('status__gte'))
+            except ValueError:
+                return Response({"message": "Invalid Filter Parameter"},
+                                status=status.HTTP_400_BAD_REQUEST)
+            final_filter = [i for i in final_filter if i.get('status') <= lte and i.get('status') >= gte]
+        elif "status__lte" in request.query_params:
+            try:
+                lte = int(request.query_params.get('status__lte'))
+            except ValueError:
+                return Response({"message": "Invalid Filter Parameter"},
+                                status=status.HTTP_400_BAD_REQUEST)
+            final_filter = [i for i in final_filter if i.get('status') <= lte]
+        elif "status__gte" in request.query_params:
+            try:
+                gte = int(request.query_params.get('status__gte'))
+            except ValueError:
+                return Response({"message": "Invalid Filter Parameter"},
+                                status=status.HTTP_400_BAD_REQUEST)
+            final_filter = [i for i in final_filter if i.get('status') >= gte]
+
+        return Response(final_filter)
     
     def post(self, request, format=None):
         """create a new project"""
@@ -242,11 +282,26 @@ class TaskCreateView(APIView):
     def get(self, request, format=None):
         """get all users tasks"""
         teams = request.user.teams.all()
+        query = {
+            "name__contains": request.query_params.get('name'),
+        }
+        query_set = {key: value for key, value in query.items() if value}
+        if 'done' in request.query_params:
+            if request.query_params.get('done').lower() == "true":
+                query_set['done'] = True
+            elif request.query_params.get('done').lower() == "false":
+                query_set['done'] = False
         tasks = []
-        for team in teams:
-            projects = team.projects.all()
-            for project in projects:
-                tasks.extend(project.tasks.all())
+        if query_set:
+            for team in teams:
+                projects = team.projects.all()
+                for project in projects:
+                    tasks.extend(project.tasks.filter(**query_set))
+        else:
+            for team in teams:
+                projects = team.projects.all()
+                for project in projects:
+                    tasks.extend(project.tasks.all())
         serializer = TaskSerializer(tasks, many=True)
 
         return Response(serializer.data)

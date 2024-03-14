@@ -49,7 +49,7 @@ class ProjectSerializer(serializers.ModelSerializer):
                                                allow_null=True)
     due_in = serializers.CharField(read_only=True)
     done_tasks = serializers.CharField(read_only=True)
-    status = serializers.FloatField(read_only=True)
+    status = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Project
