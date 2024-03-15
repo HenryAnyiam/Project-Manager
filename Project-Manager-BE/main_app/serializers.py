@@ -1,21 +1,5 @@
 from rest_framework import serializers
 from .models import User, Team, Project, Task
-
-
-class TeamSerializer(serializers.ModelSerializer):
-    """handle team serialization and deserialization"""
-    members = serializers.PrimaryKeyRelatedField(many=True,
-                                               queryset=User.objects.all(),
-                                               required=False,
-                                               allow_null=True)
-    projects = serializers.PrimaryKeyRelatedField(many=True,
-                                                  queryset=Project.objects.all(),
-                                                  required=False,
-                                                  allow_null=True)
-
-    class Meta:
-        model = Team
-        fields = ["id", "name", "members", "projects"]
     
 
 class UserSerializer(serializers.ModelSerializer):
@@ -40,6 +24,24 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+class TeamSerializer(serializers.ModelSerializer):
+    """handle team serialization and deserialization"""
+    projects = serializers.PrimaryKeyRelatedField(many=True,
+                                                  queryset=Project.objects.all(),
+                                                  required=False,
+                                                  allow_null=True)
+    members = serializers.SerializerMethodField(required=False, allow_null=True)
+
+    class Meta:
+        model = Team
+        fields = ["id", "name", "members", "projects"]
+    
+    def get_members(self, obj):
+        """get user details"""
+        members = obj.members.all()
+        if members:
+            return UserSerializer(members, many=True).data
+        return None
 
 class ProjectSerializer(serializers.ModelSerializer):
     """handle project serialization and deserialization"""
