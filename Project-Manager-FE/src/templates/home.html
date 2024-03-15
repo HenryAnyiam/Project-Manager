@@ -36,6 +36,12 @@
             <img src="../images/icons8-message-64.png" alt="Inbox" class="h-5 w-5"/>
             <span class="text-gray-400 ml-4 font-bold text-sm hover:text-gray-800">Inbox</span>
         </button>
+        <div class="flex items-end h-2/6">
+            <button class="py-2 px-2 rounded-lg flex w-full items-center my-2 hover:bg-violet-100 self-end">
+                <img src="" id="profile-pic" alt="Inbox" class="h-8 w-8 rounded-full"/>
+                <span class="ml-2 font-bold text-md hover:text-gray-800">Profile</span>
+            </button>
+        </div>
     </nav>
     <div class="flex-grow">
         <header class="flex py-2 flex-row justify-between items-center">
@@ -49,9 +55,9 @@
             
             <div class="flex basis-1/2">
                 <input type="text" placeholder="Search Project, Task etc..."
-                class="rounded-s-full py-2 px-4 pr-12 shadow-md focus:outline-none flex-grow text-xs"/>
+                class="rounded-s-full py-2 px-4 pr-12 shadow-md focus:outline-none flex-grow text-xs" id="search-bar"/>
                 <button type="submit"
-                class="text-white rounded-r-full shadow-md focus:outline-none focus:ring-2 px-4 py-2">
+                class="text-white rounded-r-full shadow-md focus:outline-none focus:ring-2 px-4 py-2" id="search-submit">
                 <img src="../images/icons8-search.svg" alt="Search" class="h-6 w-6"/>
                 </button>
 
@@ -60,7 +66,7 @@
                 </button>
             </div>
             
-            <button class="bg-blue-50 py-3 px-4 rounded-lg mr-1">
+            <button class="bg-blue-50 py-3 px-4 rounded-lg mr-1" id="add-data">
                 <img src="../images/icons8-add-button-50.png" alt="Filer" class="h-6 w-6"/>
             </button>
         </header>
@@ -84,7 +90,7 @@
                         </select>
                     </div>
                 </div>
-                <div>
+                <div id="hold-table">
                     <span id="result-length" class="text-gray-400 text-xs"></span>
                     <table class="table-auto w-full border-separate border-spacing-y-6">
                         <thead>
@@ -102,6 +108,51 @@
 
                         </tbody>
                     </table>
+                </div>
+                <div class="hidden overlay-div">
+                    <div class="centered-div items-center">
+                        <div class="flex justify-end w-full">
+                            <button class="flex" id="close">
+                                <img src="../images/icons8-close-24.png" class="h-4 w-4"/>
+                            </button>
+                        </div>
+                        <div class="flex my-4 w-full items-center justify-center" id="new-model-buttons">
+                            <button class="flex mx-4 bg-indigo-500 my-4 w-24 rounded-2xl py-2 hover:bg-indigo-400 justify-center items-center" id="close-task">
+                                <span class="text-white text-sm ml-2">New Task</span>
+                            </button>
+                            <button class="flex mx-4 bg-indigo-500 my-4 w-24 rounded-2xl py-2 hover:bg-indigo-400 justify-center items-center" id="close-project">
+                                <span class="text-white text-sm ml-2">New Project</span>
+                            </button>
+                        </div>
+
+                        <div class="flex my-4 w-full items-center justify-center hidden" id="new-project-form">
+                            <form enctype="multipart/form-data" class="bg-white rounded-3xl mt-2 pb-1 px-4 py-4 shadow-md mr-4" id="project-add">
+                                <ul id="errors1" class="mb-2"></ul>
+                                <input type="text" name="name" placeholder="Project Name" required class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"/>
+                                <input type="date" name="due_date" placeholder="Due Date" required class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"/>
+                                <input type="time" name="due_time" placeholder="Deadline Time" required class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"/>
+                                <input type="file" name="image" placeholder="Add Image" required class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"/>
+                                <select class="hover:border-neutral-500 text-gray-400 text-xs py-1 rounded-md ml-4 text-center border-2" id="pick-a-team" required name="team">
+                                    <option disabled selected>Please select Team to handle Project</option>
+                                </select>
+                                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400">
+                                    <span class="text-center text-xs text-white">Continue</span>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="flex my-4 w-full items-center justify-center hidden" id="new-task-form">
+                            <form class="bg-white rounded-3xl mt-2 pb-1 px-4 py-4 shadow-md mr-4" id="task-add">
+                                <ul id="errors2" class="mb-2"></ul>
+                                <input type="text" name="name" placeholder="Task Name" required class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"/>
+                                <select class="hover:border-neutral-500 text-gray-400 text-xs py-1 rounded-md ml-4 text-center border-2" id="pick-a-project" required name="project">
+                                    <option disabled selected>Please select the Project this task belongs to</option>
+                                </select>
+                                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400">
+                                    <span class="text-center text-xs text-white">Continue</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             
