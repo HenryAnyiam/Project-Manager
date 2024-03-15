@@ -4,7 +4,7 @@ from .models import User, Team, Project, Task
 
 class TeamSerializer(serializers.ModelSerializer):
     """handle team serialization and deserialization"""
-    users = serializers.PrimaryKeyRelatedField(many=True,
+    members = serializers.PrimaryKeyRelatedField(many=True,
                                                queryset=User.objects.all(),
                                                required=False,
                                                allow_null=True)
@@ -15,7 +15,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Team
-        fields = ["id", "name", "users", "projects"]
+        fields = ["id", "name", "members", "projects"]
     
 
 class UserSerializer(serializers.ModelSerializer):
