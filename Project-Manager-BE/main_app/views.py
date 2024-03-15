@@ -65,7 +65,8 @@ class TeamDetailView(APIView):
                 team = serializer.save()
                 if 'user' in request.data:
                     try:
-                        user = User.objects.get(request.data.get('user'))
+                        print(request.data.get("user"))
+                        user = User.objects.get(id=request.data.get('user'))
                     except User.DoesNotExist:
                         raise Http404
                     else:
@@ -73,7 +74,7 @@ class TeamDetailView(APIView):
                         team.save()
                 if 'projects' in request.data:
                     try:
-                        project = Project.objects.get(request.data.get('project'))
+                        project = Project.objects.get(id=request.data.get('project'))
                     except Project.DoesNotExist:
                         raise Http404
                     else:
