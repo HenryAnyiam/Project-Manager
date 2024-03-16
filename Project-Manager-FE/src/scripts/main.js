@@ -95,6 +95,8 @@ $(document).ready(() => {
     })
 
     $("#project-add").submit((e) => {
+        $("#submit-loader1").toggleClass("hidden");
+        $("#submit-btn1").toggleClass("hidden");
         e.preventDefault();
 
         const form = document.getElementById("project-add")
@@ -110,11 +112,16 @@ $(document).ready(() => {
             processData: false,
             contentType: false,
             success: (response) => {
+                $("#submit-loader1").toggleClass("hidden");
+                $("#submit-btn1").toggleClass("hidden");
                 $("#new-model-buttons").toggleClass("hidden");
                 $("#new-project-form").toggleClass("hidden");
                 $("#errors1").empty()
             },
             error: (xhr, status, error) => {
+                $("#submit-loader1").toggleClass("hidden");
+                $("#submit-btn1").toggleClass("hidden");
+                $("#errors1").empty()
                 for (let key in xhr.responseJSON) {
                     $("#errors1").append(`<li style="font-size: 10px; color: red;">${xhr.responseJSON[key][0]}</li>`)
                 }
@@ -123,6 +130,8 @@ $(document).ready(() => {
     })
 
     $("#task-add").submit((e) => {
+        $("#submit-loader2").toggleClass("hidden");
+        $("#submit-btn2").toggleClass("hidden");
         e.preventDefault();
 
         const form = document.getElementById("task-add")
@@ -138,11 +147,16 @@ $(document).ready(() => {
             processData: false,
             contentType: false,
             success: (response) => {
+                $("#submit-loader2").toggleClass("hidden");
+                $("#submit-btn2").toggleClass("hidden");
                 $("#new-model-buttons").toggleClass("hidden");
                 $("#new-task-form").toggleClass("hidden");
                 $("#errors2").empty()
             },
             error: (xhr, status, error) => {
+                $("#submit-loader2").toggleClass("hidden");
+                $("#submit-btn2").toggleClass("hidden");
+                $("#errors2").empty()
                 for (let key in xhr.responseJSON) {
                     $("#errors2").append(`<li style="font-size: 10px; color: red;">${xhr.responseJSON[key][0]}</li>`)
                 }

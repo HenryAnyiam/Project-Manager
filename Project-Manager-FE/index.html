@@ -10,32 +10,38 @@
 <body>
     <div>
         <header class="flex h-14 shadow-lg border-b-2 justify-between items-center px-4">
-            <h1>Project Manager</h1>
+            <h1 class="font-bold">Project Manager</h1>
             <div>
                 <a href="#">Features</a>
                 <a href="./src/templates/login.html">Log In</a>
             </div>
            
         </header>
-        <div class="bg-violet-100 flex h-screen items-center justify-between">
-            <h1>Manage Projects</h1>
-            <form enctype="multipart/form-data" class="bg-white rounded-3xl mt-2 pb-1 px-4 py-4 shadow-md mr-4" id="signup">
-                <ul id="errors" class="mb-2"></ul>
-                <label for="username" class="">Username</label>
-                <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"
-                type="text" name="username" id="username" placeholder="Enter Username" required/>
-                <label class="" for="email">Email</label>
-                <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"
-                type="email" name="email" id="email" placeholder="Enter Email" required/>
-                <label class="" for="profile_pic">Profile Picture</label>
-                <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full" type="file" name="profile_pic" id="profile_pic"/>
-                <label class="" for="password">Password</label>
-                <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"
-                type="password" name="password" id="password" placeholder="Enter Password" required/>
-                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400">
-                    <span class="text-center text-xs text-white">Sign Up</span>
-                </button>
-            </form>
+        <div class="bg-violet-100 flex h-screen">
+            <div class="w-full flex items-center justify-between">
+                <h1 class="ml-5 text-lg font-bold">Manage Projects</h1>
+                <form enctype="multipart/form-data" class="bg-white rounded-3xl mt-2 pb-1 px-4 py-4 shadow-md mr-4" id="signup">
+                    <ul id="errors" class="mb-2"></ul>
+                    <label for="username" class="">Username</label>
+                    <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"
+                    type="text" name="username" id="username" placeholder="Enter Username" required/>
+                    <label class="" for="email">Email</label>
+                    <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"
+                    type="email" name="email" id="email" placeholder="Enter Email" required/>
+                    <label class="" for="profile_pic">Profile Picture</label>
+                    <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full" type="file" name="profile_pic" id="profile_pic"/>
+                    <label class="" for="password">Password</label>
+                    <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full"
+                    type="password" name="password" id="password" placeholder="Enter Password" required/>
+                    <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400" id="signup-btn">
+                        <span class="text-center text-xs text-white">Sign Up</span>
+                    </button>
+                    <div class="bg-indigo-500 my-4 rounded-2xl w-full py-2 flex justify-center items-center hidden" id="signup-loader">
+                        <div class="rounded-full items-center loader mr-2"></div>
+                        <span class="text-center text-xs text-white ml-2">Processing</span>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <script src="./src/scripts/signup.js" type="text/javascript"></script>

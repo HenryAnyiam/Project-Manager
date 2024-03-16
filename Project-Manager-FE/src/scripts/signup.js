@@ -2,6 +2,8 @@ const base_url = "https://myprojectmanagerapi.pythonanywhere.com/api/v1"
 
 $(document).ready(() => {
     $("#signup").submit((e) => {
+        $("#signup-loader").toggleClass("hidden");
+        $("#signup-btn").toggleClass("hidden");
         e.preventDefault();
 
         const form = document.getElementById("signup")
@@ -23,6 +25,8 @@ $(document).ready(() => {
                     data: JSON.stringify({ username, password }),
                     contentType: "application/json",
                     success: (res) => {
+                        $("#signup-loader").toggleClass("hidden");
+                        $("#signup-btn").toggleClass("hidden");
                         localStorage.setItem("token", res.token);
                         window.location.href = "../templates/home.html";
                     },
@@ -32,9 +36,12 @@ $(document).ready(() => {
                 })
             },
             error: (xhr, status, error) => {
+                $("#errors").empty()
                 for (let key in xhr.responseJSON) {
                     $("#errors").append(`<li style="font-size: 10px; color: red;">${xhr.responseJSON[key][0]}</li>`)
                 }
+                $("#signup-loader").toggleClass("hidden");
+                $("#signup-btn").toggleClass("hidden");
             }
         })
     })

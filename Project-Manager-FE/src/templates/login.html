@@ -21,9 +21,13 @@
                 <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full" type="text" name="username" id="username" placeholder="Enter Username or Email"/>
                 <label class="" for="password">Password</label>
                 <input class="block py-1 px-2 mb-2 pr-12 focus:outline-none focus:bg-blue-50 flex-grow border-2 rounded-lg w-full" type="password" name="password" id="password" placeholder="Enter Password"/>
-                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400">
-                    <span class="text-center text-xs text-white">Sign Up</span>
+                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400" id="login-btn">
+                    <span class="text-center text-xs text-white">Sign In</span>
                 </button>
+                <div class="bg-indigo-500 my-4 rounded-2xl w-full py-2 flex justify-center items-center hidden" id="login-loader">
+                    <div class="rounded-full items-center loader mr-2"></div>
+                    <span class="text-center text-xs text-white ml-2">Processing</span>
+                </div>
             </form>
         </div>
     </div>

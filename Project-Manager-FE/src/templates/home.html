@@ -135,9 +135,13 @@
                                 <select class="hover:border-neutral-500 text-gray-400 text-xs py-1 rounded-md ml-4 text-center border-2" id="pick-a-team" required name="team">
                                     <option disabled selected>Please select Team to handle Project</option>
                                 </select>
-                                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400">
+                                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400" id="submit-btn1">
                                     <span class="text-center text-xs text-white">Continue</span>
                                 </button>
+                                <div class="bg-indigo-500 my-4 rounded-2xl w-full py-2 flex justify-center items-center hidden" id="submit-loader1">
+                                    <div class="rounded-full items-center loader mr-2"></div>
+                                    <span class="text-center text-xs text-white ml-2">Processing</span>
+                                </div>
                             </form>
                         </div>
                         <div class="flex my-4 w-full items-center justify-center hidden" id="new-task-form">
@@ -147,9 +151,13 @@
                                 <select class="hover:border-neutral-500 text-gray-400 text-xs py-1 rounded-md ml-4 text-center border-2" id="pick-a-project" required name="project">
                                     <option disabled selected>Please select the Project this task belongs to</option>
                                 </select>
-                                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400">
+                                <button class="bg-indigo-500 my-4 rounded-2xl w-full py-2 hover:bg-indigo-400" id="submit-btn2">
                                     <span class="text-center text-xs text-white">Continue</span>
                                 </button>
+                                <div class="bg-indigo-500 my-4 rounded-2xl w-full py-2 flex justify-center items-center hidden" id="submit-loader2">
+                                    <div class="rounded-full items-center loader mr-2"></div>
+                                    <span class="text-center text-xs text-white ml-2">Processing</span>
+                                </div>
                             </form>
                         </div>
                     </div>
