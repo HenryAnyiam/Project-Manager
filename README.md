@@ -24,4 +24,17 @@ Password12
 ```
 
 ## The UI
-![The UI](/Project-Manager-FE/src/images/Screen%20Shot%202024-03-15%20at%2017.23.08.png)
+![View1](./Project-Manager-FE/src/images/View!.png)
+
+![View2](./Project-Manager-FE/src/images/View2.png)
+
+![View3](./Project-Manager-FE/src/images/View3.png)
+
+![View4](./Project-Manager-FE/src/images/View4.png)
+
+![View5](./Project-Manager-FE/src/images/View5.png)
+
+## Demo
+
+You can find the app Demo [here.](https://youtu.be/nBXWYMvkN3M?feature=shared)
+This Demo would be updated as the apps functionality is updated
