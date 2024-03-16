@@ -79,3 +79,8 @@ progress::-webkit-progress-bar {
     transform: rotate(360deg);
   }
 }
+
+.pick-table {
+    background-color: rgb(245 243 255);
+    border-color: rgb(115 115 115);
+}

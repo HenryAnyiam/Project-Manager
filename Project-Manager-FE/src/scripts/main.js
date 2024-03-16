@@ -1,6 +1,7 @@
 const base_url = "https://myprojectmanagerapi.pythonanywhere.com/api/v1"
 const base = "https://myprojectmanagerapi.pythonanywhere.com"
 $("#hold-table").hide()
+$("#hold-table-board").hide()
 $.ajax({
     url: `${base_url}/project`,
     type: "GET",
@@ -94,6 +95,30 @@ $(document).ready(() => {
         $("#new-task-form").toggleClass("hidden");
     })
 
+    $("#list-view").bind('click', () => {
+        $("#hold-table-board").hide();
+        if ($("#board-view").hasClass("pick-table")) {
+            $("#board-view").removeClass("pick-table")
+        }
+        if (!$("#list-view").hasClass("pick-table")) {
+            $("#list-view").addClass("pick-table")
+        }
+        $("#hold-table").hide()
+        $("#hold-table").slideDown(3000)
+    })
+
+    $("#board-view").bind('click', () => {
+        $("#hold-table").hide();
+        if ($("#list-view").hasClass("pick-table")) {
+            $("#list-view").removeClass("pick-table")
+        }
+        if (!$("#board-view").hasClass("pick-table")) {
+            $("#board-view").addClass("pick-table")
+        }
+        $("#hold-table-board").hide()
+        $("#hold-table-board").slideDown(3000)
+    })
+
     $("#project-add").submit((e) => {
         $("#submit-loader1").toggleClass("hidden");
         $("#submit-btn1").toggleClass("hidden");
@@ -168,12 +193,15 @@ $(document).ready(() => {
 const populateTable = (response) => {
     const table = document.getElementById("project-view");
     $("#project-view").find("tr").remove();
+    $("#table-items").empty()
     $("#hold-table").hide()
         document.getElementById("result-length").innerHTML = `${response.length} result found`
-        let row, date, new_date;
+        document.getElementById("result-length2").innerHTML = `${response.length} result found`
+        let row, date, new_date, new_div;
         let date_options = { month: "short", day: "2-digit", year: "numeric" }
         for (let i of response) {
             row = table.insertRow(-1);
+            new_div = $('<li class="shadow-md my-8 mx-8 w-1/4 h-50 bg-blue-50 "></li>');
             row.insertCell(0).innerHTML = `<img src="${base}${i.image}" class="rounded-full h-6 w-6"/>`
             date = new Date(i.created_at.split("T")[0])
             new_date = date.toLocaleDateString('en-US', date_options)
@@ -181,14 +209,15 @@ const populateTable = (response) => {
             row.insertCell(2).innerHTML = `<span class="bg-blue-50 text-sm font-bold py-2 px-2 rounded-md">${i.due_in}</span>`
             row.insertCell(3).innerHTML = `<div><p class="text-sm font-bold">${i.done_tasks}</p><span class="text-xs text-gray-400">Tasks<span></div>`
             row.insertCell(4).innerHTML = `<div class="w-12"><div class="flex"><img src="../images/icons8-checklist-24.png" class="h-4 w-4"/><span class="text-blue-200 text-xs mr-2">Progress</span></div><progress value="${i.status}" max="100" class="task-progress"></progress></div>`
-            // row.insertCell(5).innerHTML = `<img src="../images/Screen Shot 2024-03-15 at 01.36.35.png" class="h-8 w-16"/>`
-            let row5 = row.insertCell(5)
+            let row5 = row.insertCell(5);
+            let membersImage = document.createElement("div");
+            membersImage.classList.add("flex")
+            new_div.append(membersImage)
             row.insertCell(6).innerHTML = `<button style="width: 10px;"><img src="../images/icons8-three-dots-30.png" alt="edit" class="h-4" style="width: 10px;"/></button>`
             row.classList.add("shadow-md")
             row.classList.add("rounded-md")
             row.classList.add("items-center")
             row.classList.add("h-10")
-            // row.innerHTML = `<td>${i.image}</td><td>${i.name}</td><td>${i.due_in}</td><td>${i.done_tasks}</td><td>${i.status}</td><td>${i.team}</td>`;
             $.ajax({
                 url: `${base_url}/team-detail/${i.team}`,
                 type: "GET",
@@ -221,8 +250,21 @@ const populateTable = (response) => {
                         extra = `<div class="rounded-full h-6 w-6 bg-blue-300 flex items-center justify-center"><span class="text-xs text-gray-400">+${diff}</span></div>`
                     }
                     row5.innerHTML = `<div class="flex">${images}${extra}</div>`
+                    membersImage.innerHTML = `<div class="mx-2 py-2 flex flex-wrap"><span class="text-sm font-bold flex mr-2">Members: </span>${images}${extra}</div>`
                 }
             })
+            new_div.prepend(`
+            <div class="flex justify-center border-b-2 w-full bg-white flex-wrap">
+            <img src="${base}${i.image}" class="rounded-full h-6 w-6 mr-2"/>
+            <div><p class="text-sm font-bold ml-2">${i.name}</p><span class="text-xs text-gray-400 ml-2">${new_date}<span></div>
+            </div>
+            <div class="w-full">
+            <p class="text-sm font-bold py-2 mx-2 rounded-md">Due in: ${i.due_in}</p>
+            <p class="text-sm font-bold py-2 mx-2"><span class="text-sm"> Tasks: <span>${i.done_tasks}</p>
+            <div class="w-full flex flex-wrap py-2 mx-2"><img src="../images/icons8-checklist-24.png" class="h-4 w-4"/><span class="text-blue-200 text-xs mr-4">Progress:</span><progress value="${i.status}" max="100" class="task-progress"></progress></div>
+            </div>
+            `)
+            $("#table-items").append(new_div)
         }
     $("#hold-table").slideDown(3000)
 }
